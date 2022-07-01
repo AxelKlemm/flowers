@@ -95,7 +95,7 @@ export class FlowerService {
     tempArray.sort();
 
     
-    return tempArray;
+    return tempArray as string[];
 
   }
 }
