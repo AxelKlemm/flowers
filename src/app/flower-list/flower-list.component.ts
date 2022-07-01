@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FlowerService } from '../flower.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { FlowerService } from '../flower.service';
   templateUrl: './flower-list.component.html',
   styleUrls: ['./flower-list.component.scss']
 })
-export class FlowerListComponent implements OnInit {
+export class FlowerListComponent  {
   
   flowerService: FlowerService;
   
@@ -14,7 +14,6 @@ export class FlowerListComponent implements OnInit {
     this.flowerService = fl;
   } 
 
-  ngOnInit(): void {
-  }
+ 
 
 }

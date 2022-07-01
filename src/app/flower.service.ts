@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 
 export interface Flower
 {
-   id: Number;
-   name:String;
-   category:String;
+   id: number;
+   name:string;
+   category:string;
 }
 
 export interface FlowerDetails
 {
-   id: Number;
-   description:String;
-   pictureUrl:String;
+   id: number;
+   description:string;
+   pictureUrl:string;
 }
 
 @Injectable({
@@ -38,7 +38,7 @@ export class FlowerService {
   }
 
   loadFlowerData() {
-    this.httpClient.get(this.FLOWER_API_BASE_URL+'/flowers.json').subscribe((data: any) => {
+    this.httpClient.get<Flower[]>(this.FLOWER_API_BASE_URL+'/flowers.json').subscribe((data: Flower[]) => {
       this.flowers = data;
       this.filteredList = this.flowers;
       this.categories = this.getCategories(this.filteredList)
@@ -46,20 +46,20 @@ export class FlowerService {
   }
 
   loadFlowerDetailsData() {
-    this.httpClient.get(this.FLOWER_API_BASE_URL+'/flowerdetails.json').subscribe((data: any) => {
+    this.httpClient.get<FlowerDetails[]>(this.FLOWER_API_BASE_URL+'/flowerdetails.json').subscribe((data: FlowerDetails[]) => {
       this.flowerdetails = data; 
     });
   }
 
   setFilter(filterString: string) {
-    let filterStringLower = filterString.toLowerCase();
+    const filterStringLower = filterString.toLowerCase();
     this.filteredList = this.flowers.filter((flower) => {       
       return flower.name.toLowerCase().includes(filterStringLower) || this.getFlowerDetails(flower.id).description.toLowerCase().includes(filterStringLower)
     });
     this.categories = this.getCategories(this.filteredList);
   }
 
-  getFlowerDetails(id:Number) {
+  getFlowerDetails(id:number) {
     if(this.flowerdetails.length == 0)
       this.loadFlowerDetailsData();
 
@@ -71,7 +71,7 @@ export class FlowerService {
     return tempFlower;
   }
 
-  getFlowerInfo(id:Number): Flower  {
+  getFlowerInfo(id:number): Flower  {
     let tempFlower = this.flowers.find((f) => f.id === id);
     
     if(!tempFlower) {
@@ -81,21 +81,21 @@ export class FlowerService {
   }
 
   getFlowersOfCategory(category: string): Array<Flower> {
-    let tempArray = this.filteredList.filter((a: any) => a.category == category);
+    const tempArray = this.filteredList.filter((a: Flower) => a.category == category);
     tempArray.sort();
     return tempArray;
   }
 
   getCategories(baseArray: Array<Flower>): string[] {
   
-    let tempSet = new Set()
-    baseArray.forEach((element: any) => tempSet.add(element.category))
+    const tempSet = new Set<string>()
+    baseArray.forEach((element: Flower) => tempSet.add(element.category))
 
-    let tempArray = Array<string>.from(tempSet);
+    const tempArray = Array<string>.from(tempSet);
     tempArray.sort();
 
     
-    return tempArray as string[];
+    return tempArray;
 
   }
 }

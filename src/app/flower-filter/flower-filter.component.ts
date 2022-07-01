@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef,  ViewChild } from '@angular/core';
 import { FlowerService } from '../flower.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { FlowerService } from '../flower.service';
   templateUrl: './flower-filter.component.html',
   styleUrls: ['./flower-filter.component.scss']
 })
-export class FlowerFilterComponent implements OnInit {
+export class FlowerFilterComponent  {
 
   flowerService: FlowerService;
   @ViewChild('filter') filter: ElementRef<HTMLInputElement> | undefined;
@@ -14,8 +14,7 @@ export class FlowerFilterComponent implements OnInit {
     this.flowerService = fl;
   } 
 
-  ngOnInit(): void {
-  }
+ 
 
   applyFilter(){
     let filterString = this.filter?.nativeElement.value;

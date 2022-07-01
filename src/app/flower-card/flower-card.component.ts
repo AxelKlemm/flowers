@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Flower, FlowerDetails, FlowerService } from '../flower.service';
 
 @Component({
@@ -6,9 +6,9 @@ import { Flower, FlowerDetails, FlowerService } from '../flower.service';
   templateUrl: './flower-card.component.html',
   styleUrls: ['./flower-card.component.scss']
 })
-export class FlowerCardComponent implements OnInit {
+export class FlowerCardComponent  {
 
-  @Input() flowerId:Number = 0;
+  @Input() flowerId = 0;
   
   flowerService: FlowerService;
     
@@ -24,11 +24,7 @@ export class FlowerCardComponent implements OnInit {
 
   myFlowerDetails(): FlowerDetails  {
     return this.flowerService.getFlowerDetails(this.flowerId);
-  }
-
-  ngOnInit(): void {
-    
-  }
+  }  
 
   toggleDetails(): void {
     this.detailsOpen = !this.detailsOpen;
