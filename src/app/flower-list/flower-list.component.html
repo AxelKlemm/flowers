@@ -1,0 +1,5 @@
+<div class="flower-category" *ngFor="let category of flowerService.categories">
+    <h1>{{category}}</h1>    
+    <flower-card *ngFor="let flower of flowerService.getFlowersOfCategory(category)" [flowerId]="flower.id"></flower-card>    
+</div>
+<div class="flower-list-sadness" *ngIf="flowerService.categories.length == 0">Sorry, no results!</div>
